@@ -124,3 +124,16 @@ print(list_3)
 
 Apesar de que nesta ocasião, como foi feito o fatiamento, a 3° lista é excluída também
 
+```
+board = [[EMPTY for i in range(8)] for j in range(8)]
+```
+Criando um tabuleiro com compreensão de lista aninhada
+
+
+## Funções
+É obrigatório os argumentos posicionais virem antes dos argumentos de palavra-chave
+
+Há apenas 2 situações que pode ser usado a keyword None de maneira segura:
+* Alocando em uma variável ou retornando em um resultado de função
+* Comparando a uma variável para diagnosticar um estado interno
+
