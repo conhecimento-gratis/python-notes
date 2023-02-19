@@ -137,3 +137,77 @@ Há apenas 2 situações que pode ser usado a keyword None de maneira segura:
 * Alocando em uma variável ou retornando em um resultado de função
 * Comparando a uma variável para diagnosticar um estado interno
 
+## Tuplas
+
+```python
+a = tuple(1)  # Tupla
+b = (1,)  # Tupla
+c = 1,  # Tupla
+d = (1)  # Não é tupla
+e = 1  #  Não é tupla
+```
+
+Não é possível modificar os elementos de uma tupla, mas é possível realizar operações com elas
+
+
+
+## Dicionários
+
+`dict()`
+
+Não são do tipo de sequência mas podem ser adaptados para um processamento de sequência
+
+É um set de chaves-valores
+
+
+
+Não é possível percorrer um dicionário naturalmente com o loop for, mas com estes métodos:
+
+- `.keys()` retorna uma lista com as chaves do dicionário
+- `.values()` retorna os valores do dicionário
+- `.items()` retorna uma tupla com as chaves e os valores, utilizada com 2 variáveis num loop `for
+
+
+
+Para inserir um item em um dicionário usa-se:
+
+```python
+dicionario['nova_chave'] = 'novo_valor'  # Por declaração
+
+dicionairo.update({'nova_chave': 'novo_valor'})  # Por método
+```
+
+Para remover o último item de um dicionário usa-se `.popitem()`
+
+
+
+Para selecionar certo valor por meio da chave:
+
+```python
+a = dicionario['chave']  # Por declaração
+
+b = dicionario.get('chave')  # Por método
+```
+
+
+
+```python
+d1 = {'Adam Smith': 'A', 'Judy Paxton': 'B+'}
+d2 = {'Mary Louis': 'A', 'Patrick White': 'C'}
+d3 = {}
+
+for item in (d1, d2):
+    d3.update(item)
+```
+
+Mesclando 2 dicionários
+
+
+
+Usa-se `.copy()` para copiar um iterável
+
+
+
+
+
+Usa-se o módulo chamado `unittest` para testes unitários
