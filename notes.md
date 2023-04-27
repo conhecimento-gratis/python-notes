@@ -141,9 +141,41 @@ Criando um tabuleiro com compreensão de lista aninhada
 ## Funções
 É obrigatório os argumentos posicionais virem antes dos argumentos de palavra-chave
 
-Há apenas 2 situações que pode ser usado a keyword None de maneira segura:
+Há apenas 2 situações que pode ser usado a keyword `None` de maneira segura:
 * Alocando em uma variável ou retornando em um resultado de função
 * Comparando a uma variável para diagnosticar um estado interno
+
+
+
+É possível atribuir um valor padrão casa o parâmetro não seja passado
+
+```python
+def faz_algo(a, b, c='c', d='d')
+	return a, b, c, d
+```
+
+
+
+Usa-se a convenção `*args` para passar um número indeterminado de argumentos para a função
+
+```python
+def soma(*args):
+	print(sum(args))
+
+soma(1, 2, 3)
+soma(4, 5)
+soma(10, 1, 14 ,57 ,89, 30)
+```
+
+Usa-se a convenção `**kwargs` 
+
+```python
+def soma(*args, **kwargs):
+	print(kwargs)
+
+soma(1, 2, 3, a='a')
+soma(4, 5, b='b', c='c')
+```
 
 
 
@@ -158,6 +190,42 @@ e = 1  #  Não é tupla
 ```
 
 Não é possível modificar os elementos de uma tupla, mas é possível realizar operações com elas
+
+
+
+É possível desempacotar uma tupla
+
+```python
+tupla = (1, 2, 3)
+a, b, c = tupla
+```
+
+
+
+É possível também trocar seus valores em uma mesma linha
+
+```python
+tupla = (1, 2)
+a, b = tupla
+b, a = a, b
+```
+
+
+
+```python
+a, b, *c, d = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(a)
+print(b)
+print(c)
+print(d)
+
+>>> 1
+2
+[3, 4, 5, 6, 7, 8]
+9
+```
+
+Uma variável com um asterisco `*` como prefixo recebe todos os valores da iterável que faltam das outras variáveis
 
 
 
@@ -226,9 +294,9 @@ Exemplos: MyPy, Pycodestyle, Pylint, Flake8, Pyflake, autopep8, yapf.
 
 Organiza a identação do código `Crtl + Alt + L`.
 
-Preferível não utilizar o `Tab` e não os misturar com os espaços
+Tamanho máximo de 80 caracteres para linhas de códigos Python.
 
-Padrão de 4 espaços de indentação para o Pep8.
+Preferível não utilizar o `Tab` e não os misturar com os espaços sendo o padrão de 4 espaços de indentação para o Pep8.
 
 São necessárias as docstrings no começo de um programa e seus métodos e ganha-se o atributo especial `__doc__` (Pep257).
 
@@ -657,6 +725,51 @@ if match:
 ```
 
 > Só irá corresponder ao primeiro por que precisa iniciar com um caractere que não seja um dígito
+
+
+
+- `\A`: equivale ao começo da string
+- `\Z`: equivale ao final da string
+- `\B`: corresponde a uma string vazia entre os caracteres `\w` e `\W` ou caracteres `\w` no começo ou final da string 
+- `\b`: corresponde a uma string vazia em qualquer outro lugar
+
+```python
+pattern = r'\b(cat)\b'
+
+match = re.search(pattern, "The cat sat!")
+if match:
+    print ("Combina 1")
+
+match = re.search(pattern, "We s>cat<tered?")
+if match:
+    print ("Combina 2")
+
+match = re.search(pattern, "We scattered.")
+if match:
+    print ("Combina 3")
+
+>>>
+```
+
+
+
+### Destrinchando e descomplicando sobre regex de e-mails:
+
+```python
+pattern = r'([\w\.-]+)@([\w\.-]+)(\.[\w\.]+)'
+```
+
+> Esta é um forma básica de se criar um regex para e-mail
+
+Um endereço de e-mail básico consiste em em uma palavra que possa incluir pontos `.` e traços `-` , o arroba `@` e o nome de domínio (o nome, um ponto `.` e o sufixo do nome do domínio)
+
+O regex acima contém 3 grupos:
+
+1. `[\w\.-]+`: corresponde a uma ou mais ocorrência de qualquer letra, ou número, ou ponto `.` 
+2. `[\w\.-]+`: mesmo do de cima
+3. `\.[\w\.]+`: um ponto seguido da correspondência do de cima
+
+> Como o ponto `.` significa qualquer caractere normalmente, põe-se uma contra-barra `\` antes para que o mesmo seja tratado como somente um ponto
 
 
 
