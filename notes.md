@@ -229,6 +229,12 @@ Uma variável com um asterisco `*` como prefixo recebe todos os valores da iter�
 
 
 
+## Listas
+
+`.extend()`: concatena a lista do parâmetro no final da lista do método
+
+
+
 ## Dicionários
 
 `dict()`
@@ -358,13 +364,15 @@ Importa-se na mesma linha as dependências de somente uma biblioteca.
 
 Primeiro importam-se as bibliotecas padrões.
 
-Segundo as bibliotecas miscelâneas.
+Segundo as bibliotecas de terceiros.
 
 Terceiro as bibliotecas locais.
 
 ```python
 import os  # Já vem no Python
+
 import pandas  # Necessitam ser baixadas pelo Pip
+
 import pysmells  # Você quem faz :)
 ```
 

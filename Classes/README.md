@@ -7,7 +7,7 @@ Uma classe é algo abstrato onde definimos as características e métodos dos ob
 
 
 ```python
-class Bicilicleta:
+class Bicicleta:
     def __init__(self, cor, modelo, ano, valor):
         self.cor = cor
         self.modelo = modelo
@@ -93,17 +93,9 @@ e logo depois juntou tudo com o `', '.join()`
 
 
 
-Os métodos que começam e terminam com `__` são chamados de métodos especiais
-
-A variáveis dentro de uma classe são chamadas de atributos
-
-Usa-se o método especial `__del__` para quando uma instância de um objeto for destruída
-
 ```python
 def criar_cachorro():
 	c = Cachorro('Zeus', 'branco e preto', False)
-    
-
 ```
 
 
@@ -124,3 +116,130 @@ class D(A, C):
     pass
 ```
 
+Usa-se o `super()__init__(x, y, z)` para chamar a implementação da classe pai, sendo `x, y, z` exemplos de argumento
+
+Para solucionar as dificuldades de heranças múltiplas, são usadas as `**kwargs`
+
+```python
+class Mamifero():
+    def __init__(self, x):
+		self.x = x
+        
+class Ave():
+    def __init__(self, y):
+		self.y = y
+        
+class Ornitorrinco(Mamifero, Ave):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+```
+
+`__mro__` ou `mro()`  mostra a ordem de resolução para achar os atributos e métodos dentro de uma classe
+
+
+
+#### Encapsulamento
+
+A variável de um objeto encapsulado somente pode ser alterada pelo método deste objeto, protegendo seus dados
+
+Em Diagramas UML, parâmetros privados são identificados com um sinal de menos `-`, assim como os parâmetros públicos possuem um mais `+`
+
+É necessário criar métodos para que seja possível a visualização de valores encapsulados
+
+
+
+Um Decorador ou **Decorator** são funções que executam antes da sua função principal
+
+```python
+class Foo():
+	def __init__(self):
+        self._x = x
+        
+    @property
+    def x(self):
+        return self._x or 0
+    
+    @x.setter
+    def x(self, value):
+        _x = self._x or 0
+        _value = value or 0
+        self._x = _x + value
+        
+    @x.deletter
+    def x(self):
+        self._x = -1
+        
+        
+foo = Foo(10)  # __init__
+print(foo.x)  # 10
+foo.x = 10  # x.setter
+print(foo.x)  # 20
+del foo.x  # x.deletter
+print(foo.x)  # -1
+```
+
+Não é possível atribuir valores ou settar atributos que não tenham o `@.setter` no código
+
+```python
+@x.setter
+def x(self, value):
+	return self._x + value
+```
+
+O código acima não funcionaria por que ele não é um método, mas sim um atributo, tendo que usar o operador `+=` invés de somente o `+`.
+
+
+
+### Polimorfismo
+
+É particularmente útil nos casos em que o método herdado da classe pai não se encaixa perfeitamente na classe filha.
+
+
+
+Um método de classe pode acessar ou modificar o estado da classe enquanto que um método estático não consegue.
+
+```python
+class Pessoa:
+	def __init__(self, nome=None, idade=None):
+        self.nome = nome
+        self.idade = idade
+        
+    @classmethod
+	def transformar_para_data_de_nascimento(cls, ano, mes, dia, nome):
+        idade = 2023 - ano
+        return cls(nome, idade)
+    
+    @staticmethod
+    def e_maior_idade(idade):
+        return idade >= 18
+```
+
+Serve para não criar mais uma instância de uma classe atoa.
+
+
+
+Para forçar que uma classe filha tenha os mesmos métodos da classe pai, usa-se as Classes Abstratas
+
+```python
+from abc import ABC
+
+class ControleRemoto(ABC):
+    @abstractmethod
+    def ligar(self):
+        pass
+    
+    @abstractmethod
+    def desligar(self):
+        pass
+    
+    @property
+    @abstractproperty
+    def marca(self):
+        pass
+    
+    
+class ControleRemoto(ABC):
+    pass
+```
+
+Dará erro pois não possui nem um dos 2 métodos
